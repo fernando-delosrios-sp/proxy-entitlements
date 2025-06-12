@@ -10,7 +10,7 @@ import {
 } from '@sailpoint/connector-sdk'
 import { Config } from './model/config'
 import { ISCClient } from './isc-client'
-import { AccessRequestType, EntitlementDocument, Index } from 'sailpoint-api-client'
+import { AccessRequestType, EntitlementDocument, IdentityDocument, Index } from 'sailpoint-api-client'
 import { Entitlement } from './model/entitlement'
 import { Account } from './model/account'
 
@@ -58,10 +58,18 @@ export const connector = async () => {
         const name = input.attributes.name as string
         const entitlements = [input.attributes.entitlements].flat()
 
-        const identity = await isc.getIdentityByName(name)
+        let identity: IdentityDocument | undefined = undefined
+        let attempts = 0
+        const maxAttempts = 5
+        const delayMs = 60000 // 1 minute in milliseconds
 
-        if (!identity) {
-            throw new ConnectorError('Identity not found')
+        while (!identity) {
+            identity = await isc.getIdentityByName(name)
+            await new Promise((resolve) => setTimeout(resolve, identity ? 0 : delayMs))
+            attempts++
+            if (attempts > maxAttempts) {
+                throw new ConnectorError(`Identity not found after ${maxAttempts} attempts`)
+            }
         }
 
         const response = await createAccessRequest(identity.id, entitlements, AccessRequestType.GrantAccess)
