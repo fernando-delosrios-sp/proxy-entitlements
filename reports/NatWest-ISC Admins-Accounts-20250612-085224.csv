@@ -1,0 +1,7 @@
+"id","name","givenName","familyName","e-mail","location","manager","groups","phone"
+"fernando.delosrios","fernando.delosrios","fernando","delosrios","fernando.delosrios@sailpoint.com","","","",""
+"luca.lori","luca.lori","luca","lori","luca.lori@sailpoint.com","","","",""
+"mo.joueid","mo.joueid","mo","joueid","mo.joueid@sailpoint.com","","","","15125159969"
+"se.admin","se.admin","SE","Admin","se-password-reset@sailpoint.com","","","","15125159969"
+"ServiceNow.Catalog","ServiceNow.Catalog","ServiceNow","Catalog","luca.lori@sailpoint.com","","","",""
+"Privileged Requests Service","Privileged Requests Service","Privileged Requests","Service","fernando.delosrios+prs@sailpoint.com","","","",""

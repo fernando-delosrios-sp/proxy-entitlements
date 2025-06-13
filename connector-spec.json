@@ -1,5 +1,6 @@
 {
     "name": "Proxy Entitlements",
+    "description": "This connector is used to manage proxy entitlements in Identity Security Cloud.",
     "commands": ["std:test-connection", "std:account:create", "std:account:update", "std:entitlement:list"],
     "showDebugLoggingOption": true,
     "sourceConfigInitialValues": {

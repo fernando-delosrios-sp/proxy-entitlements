@@ -29,6 +29,7 @@ import {
 } from 'sailpoint-api-client'
 import { TOKEN_URL_PATH } from './data/constants'
 import { Config } from './model/config'
+import { logger } from '@sailpoint/connector-sdk'
 
 export class ISCClient {
     private config: Configuration
@@ -115,12 +116,12 @@ export class ISCClient {
         }
     }
 
-    async getIdentityByName(name: string): Promise<IdentityDocument | undefined> {
+    async getIdentityByUid(name: string): Promise<IdentityDocument | undefined> {
         const api = new SearchApi(this.config)
         const search: Search = {
             indices: ['identities'],
             query: {
-                query: `name.exact:${name}`,
+                query: `attributes.uid.exact:${name}`,
             },
             includeNested: true,
         }
